@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}HealthFit Classifier - Home{% endblock %}
+{% block title %}Clasificador de Salud y Fitness - Inicio{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -8,11 +8,11 @@
     <div class="mb-8">
         <i class="fas fa-heartbeat text-6xl text-health-primary mb-4"></i>
         <h1 class="text-4xl md:text-5xl font-bold text-health-dark mb-4">
-            HealthFit Classifier
+            Clasificador de Salud y Fitness
         </h1>
         <p class="text-xl text-health-dark/70 max-w-3xl mx-auto leading-relaxed">
-            Discover your health and fitness profile using advanced machine learning. 
-            Our KMeans clustering algorithm analyzes your BMI and daily activity to classify you into personalized health groups.
+            Descubre tu perfil de salud y fitness usando aprendizaje automático avanzado. 
+            Nuestro algoritmo de agrupación KMeans analiza tu IMC y actividad diaria para clasificarte en grupos de salud personalizados.
         </p>
     </div>
 </div>
@@ -25,15 +25,15 @@
             <div class="bg-health-light rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <i class="fas fa-user-md text-2xl text-health-primary"></i>
             </div>
-            <h3 class="text-2xl font-bold text-health-dark mb-4">Health Classification</h3>
+            <h3 class="text-2xl font-bold text-health-dark mb-4">Clasificación de Salud</h3>
             <p class="text-health-dark/70 mb-6 leading-relaxed">
-                Input your BMI and daily steps to get classified into one of our health and fitness groups. 
-                Receive personalized insights and recommendations based on your profile.
+                Ingresa tu IMC y pasos diarios para ser clasificado en uno de nuestros grupos de salud y fitness. 
+                Recibe insights personalizados y recomendaciones basadas en tu perfil.
             </p>
             <a href="/predict/imc_pasos" 
                class="inline-flex items-center bg-health-primary hover:bg-health-secondary text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
                 <i class="fas fa-calculator mr-2"></i>
-                Start Classification
+                Iniciar Clasificación
             </a>
         </div>
     </div>
@@ -44,15 +44,15 @@
             <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <i class="fas fa-chart-scatter text-2xl text-blue-600"></i>
             </div>
-            <h3 class="text-2xl font-bold text-health-dark mb-4">Interactive Visualization</h3>
+            <h3 class="text-2xl font-bold text-health-dark mb-4">Visualización Interactiva</h3>
             <p class="text-health-dark/70 mb-6 leading-relaxed">
-                Explore our interactive clustering visualization to understand how different health profiles 
-                are distributed and see where you might fit in the overall population.
+                Explora nuestra visualización interactiva de agrupación para entender cómo se distribuyen los diferentes perfiles de salud 
+                y ver dónde podrías encajar en la población general.
             </p>
             <a href="/visualization" 
                class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
                 <i class="fas fa-chart-line mr-2"></i>
-                View Visualization
+                Ver Visualización
             </a>
         </div>
     </div>
@@ -60,28 +60,28 @@
 
 <!-- How It Works Section -->
 <div class="bg-white rounded-2xl shadow-xl p-8 border border-health-accent/20 mb-12">
-    <h2 class="text-3xl font-bold text-health-dark text-center mb-8">How It Works</h2>
+    <h2 class="text-3xl font-bold text-health-dark text-center mb-8">Cómo Funciona</h2>
     <div class="grid md:grid-cols-3 gap-8">
         <div class="text-center">
             <div class="bg-health-light rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
                 <span class="text-health-primary font-bold text-lg">1</span>
             </div>
-            <h4 class="font-semibold text-health-dark mb-2">Input Your Data</h4>
-            <p class="text-health-dark/70 text-sm">Enter your BMI and daily step count</p>
+            <h4 class="font-semibold text-health-dark mb-2">Ingresa tus Datos</h4>
+            <p class="text-health-dark/70 text-sm">Ingresa tu IMC y conteo de pasos diarios</p>
         </div>
         <div class="text-center">
             <div class="bg-health-light rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
                 <span class="text-health-primary font-bold text-lg">2</span>
             </div>
-            <h4 class="font-semibold text-health-dark mb-2">AI Analysis</h4>
-            <p class="text-health-dark/70 text-sm">Our KMeans algorithm processes your information</p>
+            <h4 class="font-semibold text-health-dark mb-2">Análisis de IA</h4>
+            <p class="text-health-dark/70 text-sm">Nuestro algoritmo KMeans procesa tu información</p>
         </div>
         <div class="text-center">
             <div class="bg-health-light rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
                 <span class="text-health-primary font-bold text-lg">3</span>
             </div>
-            <h4 class="font-semibold text-health-dark mb-2">Get Results</h4>
-            <p class="text-health-dark/70 text-sm">Receive your health classification and insights</p>
+            <h4 class="font-semibold text-health-dark mb-2">Obtén Resultados</h4>
+            <p class="text-health-dark/70 text-sm">Recibe tu clasificación de salud e insights</p>
         </div>
     </div>
 </div>
@@ -90,15 +90,15 @@
 <div class="grid md:grid-cols-3 gap-6 text-center">
     <div class="bg-white rounded-xl p-6 shadow-lg border border-health-accent/20">
         <div class="text-3xl font-bold text-health-primary mb-2">3</div>
-        <div class="text-health-dark/70">Health Groups</div>
+        <div class="text-health-dark/70">Grupos de Salud</div>
     </div>
     <div class="bg-white rounded-xl p-6 shadow-lg border border-health-accent/20">
         <div class="text-3xl font-bold text-health-primary mb-2">2</div>
-        <div class="text-health-dark/70">Key Metrics</div>
+        <div class="text-health-dark/70">Métricas Clave</div>
     </div>
     <div class="bg-white rounded-xl p-6 shadow-lg border border-health-accent/20">
-        <div class="text-3xl font-bold text-health-primary mb-2">AI</div>
-        <div class="text-health-dark/70">Powered</div>
+        <div class="text-3xl font-bold text-health-primary mb-2">IA</div>
+        <div class="text-health-dark/70">Potenciado</div>
     </div>
 </div>
 {% endblock %}

@@ -24,20 +24,20 @@ kmeans_model, scaler = load_models()
 # Cluster descriptions for better user understanding
 CLUSTER_DESCRIPTIONS = {
     0: {
-        "name": "Sedentary Lifestyle",
-        "description": "Low physical activity with higher BMI. Consider increasing daily steps and maintaining a balanced diet.",
+        "name": "Estilo de Vida Sedentario",
+        "description": "Baja actividad física con IMC más alto. Considera aumentar los pasos diarios y mantener una dieta equilibrada.",
         "color": "bg-red-100 text-red-800 border-red-200",
         "icon": "🚶‍♂️"
     },
     1: {
-        "name": "Moderately Active",
-        "description": "Good balance of BMI and daily activity. Keep up the great work!",
+        "name": "Moderadamente Activo",
+        "description": "Buen equilibrio entre IMC y actividad diaria. ¡Sigue así!",
         "color": "bg-yellow-100 text-yellow-800 border-yellow-200",
         "icon": "🏃‍♂️"
     },
     2: {
-        "name": "Highly Active",
-        "description": "Excellent fitness profile with optimal BMI and high activity levels.",
+        "name": "Altamente Activo",
+        "description": "Excelente perfil de fitness con IMC óptimo y altos niveles de actividad.",
         "color": "bg-green-100 text-green-800 border-green-200",
         "icon": "🏋️‍♂️"
     }
@@ -62,7 +62,7 @@ def predict_imc_pasos():
             
             if kmeans_model is None or scaler is None:
                 return render_template('imc_pasos.html', 
-                                     error="Model files not found. Please ensure model files are in the correct location.")
+                                     error="Archivos del modelo no encontrados. Por favor, asegúrate de que los archivos del modelo estén en la ubicación correcta.")
             
             # Prepare data for prediction
             user_data = np.array([[imc, pasos]])
@@ -75,8 +75,8 @@ def predict_imc_pasos():
             
             # Get cluster information
             cluster_info = CLUSTER_DESCRIPTIONS.get(cluster, {
-                "name": f"Cluster {cluster}",
-                "description": "Classification complete.",
+                "name": f"Grupo {cluster}",
+                "description": "Clasificación completada.",
                 "color": "bg-blue-100 text-blue-800 border-blue-200",
                 "icon": "📊"
             })
@@ -90,10 +90,10 @@ def predict_imc_pasos():
             
         except ValueError:
             return render_template('imc_pasos.html', 
-                                 error="Please enter valid numeric values for BMI and daily steps.")
+                                 error="Por favor, ingresa valores numéricos válidos para IMC y pasos diarios.")
         except Exception as e:
             return render_template('imc_pasos.html', 
-                                 error=f"An error occurred: {str(e)}")
+                                 error=f"Ocurrió un error: {str(e)}")
 
 @app.route('/visualization')
 def visualization():
