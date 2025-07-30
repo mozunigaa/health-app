@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Health & Fitness Classifier{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'health-primary': '#10b981',
+                        'health-secondary': '#059669',
+                        'health-accent': '#34d399',
+                        'health-light': '#d1fae5',
+                        'health-dark': '#064e3b'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-health-light to-blue-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b border-health-accent/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <i class="fas fa-heartbeat text-health-primary text-2xl"></i>
+                        <span class="text-xl font-bold text-health-dark">HealthFit Classifier</span>
+                    </a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="/" class="text-health-dark hover:text-health-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-home mr-1"></i>Home
+                    </a>
+                    <a href="/predict/imc_pasos" class="text-health-dark hover:text-health-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-calculator mr-1"></i>Classify
+                    </a>
+                    <a href="/visualization" class="text-health-dark hover:text-health-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-chart-scatter mr-1"></i>Visualization
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-health-accent/20 mt-16">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-health-dark/60">
+                <p>&copy; 2024 HealthFit Classifier. Built with Flask & Machine Learning.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

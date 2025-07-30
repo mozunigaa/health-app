@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Health Classification - HealthFit Classifier{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8">
+        <i class="fas fa-user-md text-5xl text-health-primary mb-4"></i>
+        <h1 class="text-3xl md:text-4xl font-bold text-health-dark mb-4">Health Classification</h1>
+        <p class="text-lg text-health-dark/70">Enter your BMI and daily steps to discover your health profile</p>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Form Section -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 border border-health-accent/20">
+            <h2 class="text-2xl font-bold text-health-dark mb-6">Your Information</h2>
+            
+            {% if error %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>{{ error }}</span>
+                </div>
+            </div>
+            {% endif %}
+
+            <form method="POST" class="space-y-6">
+                <!-- BMI Input -->
+                <div>
+                    <label for="imc" class="block text-sm font-semibold text-health-dark mb-2">
+                        <i class="fas fa-weight mr-2"></i>BMI (Body Mass Index)
+                    </label>
+                    <input type="number" 
+                           id="imc" 
+                           name="imc" 
+                           step="0.1" 
+                           min="10" 
+                           max="50" 
+                           required
+                           value="{{ imc if imc else '' }}"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-health-primary focus:border-transparent transition-all duration-200"
+                           placeholder="e.g., 23.5">
+                    <p class="text-sm text-gray-500 mt-1">Normal range: 18.5 - 24.9</p>
+                </div>
+
+                <!-- Daily Steps Input -->
+                <div>
+                    <label for="pasos" class="block text-sm font-semibold text-health-dark mb-2">
+                        <i class="fas fa-walking mr-2"></i>Daily Steps
+                    </label>
+                    <input type="number" 
+                           id="pasos" 
+                           name="pasos" 
+                           min="0" 
+                           max="50000" 
+                           required
+                           value="{{ pasos if pasos else '' }}"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-health-primary focus:border-transparent transition-all duration-200"
+                           placeholder="e.g., 8000">
+                    <p class="text-sm text-gray-500 mt-1">Recommended: 8,000 - 10,000 steps/day</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                        class="w-full bg-health-primary hover:bg-health-secondary text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    Classify My Health Profile
+                </button>
+            </form>
+        </div>
+
+        <!-- Result Section -->
+        <div class="space-y-6">
+            {% if prediction %}
+            <!-- Classification Result -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border border-health-accent/20">
+                <h2 class="text-2xl font-bold text-health-dark mb-6">Your Classification</h2>
+                
+                <!-- Cluster Badge -->
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center {{ cluster_info.color }} px-6 py-3 rounded-full border-2 text-lg font-semibold">
+                        <span class="text-2xl mr-3">{{ cluster_info.icon }}</span>
+                        {{ cluster_info.name }}
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                    <p class="text-health-dark leading-relaxed">{{ cluster_info.description }}</p>
+                </div>
+
+                <!-- Your Data Summary -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-health-light rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-health-primary">{{ "%.1f"|format(imc) }}</div>
+                        <div class="text-sm text-health-dark/70">Your BMI</div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-600">{{ "{:,}".format(pasos|int) }}</div>
+                        <div class="text-sm text-health-dark/70">Daily Steps</div>
+                    </div>
+                </div>
+
+                <!-- Cluster Info -->
+                <div class="text-center">
+                    <span class="text-sm text-health-dark/60">Cluster Group: {{ cluster }}</span>
+                </div>
+            </div>
+            {% else %}
+            <!-- Instructions -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border border-health-accent/20">
+                <h2 class="text-2xl font-bold text-health-dark mb-6">How to Use</h2>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-health-light rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-health-primary font-bold text-sm">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-health-dark">Enter your BMI</h4>
+                            <p class="text-sm text-health-dark/70">Calculate your BMI using: weight (kg) ÷ height² (m²)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-health-light rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-health-primary font-bold text-sm">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-health-dark">Add your daily steps</h4>
+                            <p class="text-sm text-health-dark/70">Use your fitness tracker or smartphone data</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-health-light rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="text-health-primary font-bold text-sm">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-health-dark">Get your classification</h4>
+                            <p class="text-sm text-health-dark/70">Receive personalized health insights</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Visualization Link -->
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-xl p-6 text-white">
+                <h3 class="text-xl font-bold mb-3">
+                    <i class="fas fa-chart-scatter mr-2"></i>
+                    Explore the Data
+                </h3>
+                <p class="mb-4 opacity-90">See how different health profiles cluster together in our interactive visualization.</p>
+                <a href="/visualization" 
+                   class="inline-flex items-center bg-white text-blue-600 font-semibold py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                    <i class="fas fa-external-link-alt mr-2"></i>
+                    View Interactive Chart
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

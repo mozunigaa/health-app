@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Clusters Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Health & Fitness Clusters Visualization</h1>
+            <p class="text-gray-600">Interactive visualization showing how BMI and daily steps cluster into health groups</p>
+            <a href="/predict/imc_pasos" class="inline-block mt-4 bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition-colors">
+                ← Back to Classification
+            </a>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div id="plotly-div" style="width:100%;height:600px;"></div>
+        </div>
+        
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Understanding the Clusters</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                    <h3 class="font-semibold text-red-800 mb-2">🚶‍♂️ Sedentary Lifestyle</h3>
+                    <p class="text-sm text-red-700">Higher BMI with lower daily activity levels. Focus on increasing movement and balanced nutrition.</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <h3 class="font-semibold text-yellow-800 mb-2">🏃‍♂️ Moderately Active</h3>
+                    <p class="text-sm text-yellow-700">Balanced BMI and activity levels. Maintain current habits with room for improvement.</p>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                    <h3 class="font-semibold text-green-800 mb-2">🏋️‍♂️ Highly Active</h3>
+                    <p class="text-sm text-green-700">Optimal BMI with high activity levels. Excellent fitness profile to maintain.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for demonstration - replace with actual cluster data
+        const sampleData = {
+            cluster0: {
+                x: [28, 30, 32, 29, 31, 27, 33, 35, 26, 34],
+                y: [3000, 2500, 4000, 3500, 2800, 4200, 3200, 2000, 4500, 2300],
+                name: 'Sedentary Lifestyle',
+                mode: 'markers',
+                marker: {
+                    color: 'rgba(239, 68, 68, 0.7)',
+                    size: 10,
+                    line: {
+                        color: 'rgba(239, 68, 68, 1)',
+                        width: 2
+                    }
+                }
+            },
+            cluster1: {
+                x: [24, 25, 26, 23, 27, 22, 28, 21, 25.5, 24.5],
+                y: [6000, 7000, 6500, 8000, 5500, 7500, 6200, 8500, 7200, 6800],
+                name: 'Moderately Active',
+                mode: 'markers',
+                marker: {
+                    color: 'rgba(245, 158, 11, 0.7)',
+                    size: 10,
+                    line: {
+                        color: 'rgba(245, 158, 11, 1)',
+                        width: 2
+                    }
+                }
+            },
+            cluster2: {
+                x: [20, 21, 22, 19, 23, 18, 21.5, 20.5, 22.5, 19.5],
+                y: [12000, 15000, 13500, 14000, 11000, 16000, 13000, 14500, 12500, 15500],
+                name: 'Highly Active',
+                mode: 'markers',
+                marker: {
+                    color: 'rgba(34, 197, 94, 0.7)',
+                    size: 10,
+                    line: {
+                        color: 'rgba(34, 197, 94, 1)',
+                        width: 2
+                    }
+                }
+            }
+        };
+
+        const layout = {
+            title: {
+                text: 'Health Clusters: BMI vs Daily Steps',
+                font: {
+                    size: 20,
+                    color: '#1f2937'
+                }
+            },
+            xaxis: {
+                title: 'BMI (Body Mass Index)',
+                titlefont: {
+                    size: 16,
+                    color: '#374151'
+                },
+                tickfont: {
+                    size: 14,
+                    color: '#6b7280'
+                },
+                gridcolor: '#e5e7eb'
+            },
+            yaxis: {
+                title: 'Daily Steps',
+                titlefont: {
+                    size: 16,
+                    color: '#374151'
+                },
+                tickfont: {
+                    size: 14,
+                    color: '#6b7280'
+                },
+                gridcolor: '#e5e7eb'
+            },
+            plot_bgcolor: '#f9fafb',
+            paper_bgcolor: '#ffffff',
+            legend: {
+                x: 0.02,
+                y: 0.98,
+                bgcolor: 'rgba(255, 255, 255, 0.8)',
+                bordercolor: '#d1d5db',
+                borderwidth: 1
+            },
+            hovermode: 'closest'
+        };
+
+        const config = {
+            responsive: true,
+            displayModeBar: true,
+            modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d'],
+            displaylogo: false
+        };
+
+        Plotly.newPlot('plotly-div', [sampleData.cluster0, sampleData.cluster1, sampleData.cluster2], layout, config);
+    </script>
+</body>
+</html>
