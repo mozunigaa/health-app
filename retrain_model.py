@@ -167,12 +167,12 @@ fig.add_trace(
 
 # Actualizar layout
 fig.update_layout(
-    title={
-        'text': 'HealthFit Classifier - Análisis de Clusters de Salud',
-        'x': 0.5,
-        'xanchor': 'center',
-        'font': {'size': 24, 'color': '#064e3b'}
-    },
+                title={
+                'text': 'Health PredictApp - Análisis de Clusters de Salud',
+                'x': 0.5,
+                'xanchor': 'center',
+                'font': {'size': 24, 'color': '#064e3b'}
+            },
     plot_bgcolor='white',
     width=1000,
     height=800,

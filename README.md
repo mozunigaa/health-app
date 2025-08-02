@@ -1,4 +1,4 @@
-# HealthFit Classifier
+# Health PredictApp
 
 A modern web application that uses KMeans clustering to classify users into different health and fitness groups based on their BMI and daily step count.
 
